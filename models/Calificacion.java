@@ -9,7 +9,7 @@ import java.sql.SQLException;
     PreparedStatement stmt;
       public int getCalificacion(int idEstudiante, int idEjercicio, Connection con){
         try{
-          String query = "SELECT calificacion FROM Calificacion WHERE idEstudiante = ? AND idEjercicio = ?";
+          String query = "SELECT calificacion FROM Calificacion WHERE IdEstudiante = ? AND IdEjercicio= ?";
           stmt = con.prepareStatement(query);
           stmt.setInt(1, idEstudiante);
           stmt.setInt(2, idEjercicio);

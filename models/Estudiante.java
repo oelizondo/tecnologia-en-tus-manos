@@ -58,7 +58,7 @@ public class Estudiante{
 
       public void setNombre(int idEstudiante, String sNombre, Connection con){
         try{
-            String query = "UPDATE Estudiante SET nombre = ?  WHERE idEstudiante = ?";
+            String query = "UPDATE Estudiante SET nombre = ?  WHERE Id = ?";
             stmt = con.prepareStatement(query);
             stmt.setString(1, sNombre);
             stmt.setInt(2, idEstudiante);
@@ -72,7 +72,7 @@ public class Estudiante{
 
       public void setTelefono(int idEstudiante, String sTelefono, Connection con){
         try{
-            String query = "UPDATE Estudiante SET telefono = ?  WHERE idEstudiante = ?";
+            String query = "UPDATE Estudiante SET telefono = ?  WHERE Id = ?";
             stmt = con.prepareStatement(query);
             stmt.setString(1, sTelefono);
             stmt.setInt(2, idEstudiante);
@@ -86,7 +86,7 @@ public class Estudiante{
 
       public void setMail(int idEstudiante, String sMail, Connection con){
         try{
-            String query = "UPDATE Estudiante SET mail = ?  WHERE idEstudiante = ?";
+            String query = "UPDATE Estudiante SET mail = ?  WHERE iD = ?";
             stmt = con.prepareStatement(query);
             stmt.setString(1, sMail);
             stmt.setInt(2, idEstudiante);
@@ -101,13 +101,13 @@ public class Estudiante{
 
       public int tomarLecturas(int idLectura, Connection con){
         try{
-            String query = "SELECT idLectura FROM Lectura WHERE idLectura = ?";
+            String query = "SELECT Id FROM Lectura WHERE Id = ?";
             stmt = con.prepareStatement(query);
             stmt.setInt(1, idLectura);
 
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) { ///Va al primer registro si lo hay
-               int idLect = rs.getInt ("idLectura");
+               int idLect = rs.getInt ("Id");
                rs.close();
                return(idLect);
              }
@@ -121,7 +121,7 @@ public class Estudiante{
           stmt = con.prepareStatement(query);
           ResultSet rs = stmt.executeQuery();
           if (rs.next()) { ///Va al primer registro si lo hay
-             int idLectura = rs.getInt ("idLectura");
+             int idLectura = rs.getInt ("Id");
              rs.close();
              return(idLectura);
            }
@@ -131,7 +131,7 @@ public class Estudiante{
 
      public String getPregunta(int idEjercicio, Connection con){
        try{
-         String query = "SELECT pregunta FROM Ejercicio WHERE idEjercicio = ?";
+         String query = "SELECT pregunta FROM Ejercicio WHERE Id = ?";
          stmt = con.prepareStatement(query);
          stmt.setInt(1, idEjercicio);
 
@@ -148,13 +148,13 @@ public class Estudiante{
 
      public String getEjercicio(int idLectura, Connection con){
       try{
-        String query = "SELECT idEjercicio FROM Lectura WHERE idLectura = ?";
+        String query = "SELECT Id FROM Lectura WHERE Id = ?";
         stmt = con.prepareStatement(query);
         stmt.setInt(1, idLectura);
 
         ResultSet rs = stmt.executeQuery();
         if (rs.next()) { ///Va al primer registro si lo hay
-         int nIdEjercicio = rs.getInt ("idEjercicio");
+         int nIdEjercicio = rs.getInt ("Id");
          rs.close();
          return(getPregunta(nIdEjercicio, con));
           }
@@ -188,7 +188,7 @@ public class Estudiante{
          stmt.setString(4, mail);
          stmt.setString(5, password);
          stmt.execute();
-      }catch (Exception e) { System.out.println ("No se pudo ejecutar agregar() a la tabla Cliente" + e ); }
+      }catch (Exception e) { System.out.println ("No se pudo ejecutar agregar() a la tabla Alumno" + e ); }
     }
 
     public int validar(String nombre, String password, Connection con) {
