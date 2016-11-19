@@ -8,6 +8,97 @@ import java.sql.SQLException;
 public class Estudiante{
     PreparedStatement stmt;
 
+      public String getNombre(int idEstudiante, Connection con){
+        try{
+            String query = "SELECT nombre FROM Estudiante WHERE idEstudiante = ?";
+            stmt = con.prepareStatement(query);
+            stmt.setInt(1, idEstudiante);
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) { ///Va al primer registro si lo hay
+               String sNombre = rs.getString ("nombre");
+               rs.close();
+               return(sNombre);
+             }
+          } catch (SQLException e) {}
+         return "";
+      }
+
+      public String getTelefono(int idEstudiante, Connection con){
+        try{
+            String query = "SELECT telefono FROM Estudiante WHERE idEstudiante = ?";
+            stmt = con.prepareStatement(query);
+            stmt.setInt(1, idEstudiante);
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) { ///Va al primer registro si lo hay
+               String sTelefono = rs.getString ("telefono");
+               rs.close();
+               return(sTelefono);
+             }
+          } catch (SQLException e) {}
+         return "";
+      }
+
+      public String getMail(int idEstudiante, Connection con){
+        try{
+            String query = "SELECT mail FROM Estudiante WHERE idEstudiante = ?";
+            stmt = con.prepareStatement(query);
+            stmt.setInt(1, idEstudiante);
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) { ///Va al primer registro si lo hay
+               String sMail = rs.getString ("mail");
+               rs.close();
+               return(sMail);
+             }
+          } catch (SQLException e) {}
+         return "";
+      }
+
+      public void setNombre(int idEstudiante, String sNombre, Connection con){
+        try{
+            String query = "UPDATE Estudiante SET nombre = ?  WHERE idEstudiante = ?";
+            stmt = con.prepareStatement(query);
+            stmt.setString(1, sNombre);
+            stmt.setInt(2, idEstudiante);
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) { ///Va al primer registro si lo hay
+               rs.close();
+             }
+          } catch (SQLException e) {}
+      }
+
+      public void setTelefono(int idEstudiante, String sTelefono, Connection con){
+        try{
+            String query = "UPDATE Estudiante SET telefono = ?  WHERE idEstudiante = ?";
+            stmt = con.prepareStatement(query);
+            stmt.setString(1, sTelefono);
+            stmt.setInt(2, idEstudiante);
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) { ///Va al primer registro si lo hay
+               rs.close();
+             }
+          } catch (SQLException e) {}
+      }
+
+      public void setMail(int idEstudiante, String sMail, Connection con){
+        try{
+            String query = "UPDATE Estudiante SET mail = ?  WHERE idEstudiante = ?";
+            stmt = con.prepareStatement(query);
+            stmt.setString(1, sMail);
+            stmt.setInt(2, idEstudiante);
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) { ///Va al primer registro si lo hay
+               rs.close();
+             }
+          } catch (SQLException e) {}
+      }
+
+
       public int tomarLecturas(int idLectura, Connection con){
         try{
             String query = "SELECT idLectura FROM Lectura WHERE idLectura = ?";
