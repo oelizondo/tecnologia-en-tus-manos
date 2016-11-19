@@ -8,7 +8,7 @@ import java.sql.SQLException;
 public class Estudiante{
     PreparedStatement stmt;
 
-      public int tomarLecturas(String id, Connection con){
+      public int tomarLecturas(int idLectura, Connection con){
         try{
             String query = "SELECT idLectura FROM Lectura WHERE idLectura = ?";
             stmt = con.prepareStatement(query);
@@ -16,7 +16,6 @@ public class Estudiante{
 
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) { ///Va al primer registro si lo hay
-               int idLectura = rs.getInt ("idLectura");
                rs.close();
                return(idLectura);
              }
@@ -34,8 +33,9 @@ public class Estudiante{
              rs.close();
              return(idLectura);
            }
-        } catch (SQLException e) {}
-       return 0;
+        } catch (SQLException e) {
+          return 0;  
+        }
        }
 
      public String getPregunta(int idEjercicio, Connection con){
