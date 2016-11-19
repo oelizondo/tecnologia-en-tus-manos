@@ -1,4 +1,4 @@
-package entidades;
+package models;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,8 +16,9 @@ public class Estudiante{
 
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) { ///Va al primer registro si lo hay
+               int idLect = rs.getInt ("idLectura");
                rs.close();
-               return(idLectura);
+               return(idLect);
              }
           } catch (SQLException e) {}
          return 0;
@@ -33,9 +34,8 @@ public class Estudiante{
              rs.close();
              return(idLectura);
            }
-        } catch (SQLException e) {
-          return 0;  
-        }
+        } catch (SQLException e) {}
+       return 0;
        }
 
      public String getPregunta(int idEjercicio, Connection con){
@@ -44,13 +44,14 @@ public class Estudiante{
          stmt = con.prepareStatement(query);
          stmt.setInt(1, idEjercicio);
 
+         ResultSet rs = stmt.executeQuery();
          if (rs.next()) { ///Va al primer registro si lo hay
           String sPregunta = rs.getString ("pregunta");
           rs.close();
           return(sPregunta);
            }
          } catch (SQLException e) {}
-         return 0;
+         return "";
        }
 
 
@@ -60,21 +61,23 @@ public class Estudiante{
         stmt = con.prepareStatement(query);
         stmt.setInt(1, idLectura);
 
+        ResultSet rs = stmt.executeQuery();
         if (rs.next()) { ///Va al primer registro si lo hay
          int nIdEjercicio = rs.getInt ("idEjercicio");
          rs.close();
-         return(getDescripcion(nIdEjercicio, con));
+         return(getPregunta(nIdEjercicio, con));
           }
         } catch (SQLException e) {}
-        return 0;
+        return "";
       }
 
     public int compartirAvances(int idAlumno, Connection con){
       try{
-        String query = "SELECT COUNT(*) FROM calificacion WHERE idAlumno = ? AND calificacion = 100";
+        String query = "SELECT COUNT(*) FROM calificacion WHERE idEstudiante = ? AND calificacion = 100";
         stmt = con.prepareStatement(query);
         stmt.setInt(1,idAlumno);
 
+        ResultSet rs = stmt.executeQuery();
         if (rs.next()) { ///Va al primer registro si lo hay
          int iCount = rs.getInt ("COUNT(*)");
          rs.close();
@@ -84,16 +87,45 @@ public class Estudiante{
         return 0;
       }
 
-    public void darseAlta(String nombre, String telefono, String mail, String password){
+    public void darseAlta(String nombre, String telefono, String mail, String password, Connection con){
       try {
-         String query = "INSERT INTO alumno (idAdministrador, nombre, telefono, mail, password) VALUES (?, ?, ?, ?, ?)";
+         String query = "INSERT INTO Estudiante (idAdministrador, nombre, telefono, mail, password) VALUES (?, ?, ?, ?, ?)";
          stmt = con.prepareStatement(query);
-         stmt.setString(1, 1);
+         stmt.setInt(1, 1);
          stmt.setString(2, nombre);
-         stmt.setInt(3, telefono);
+         stmt.setString(3, telefono);
          stmt.setString(4, mail);
          stmt.setString(5, password);
          stmt.execute();
       }catch (Exception e) { System.out.println ("No se pudo ejecutar agregar() a la tabla Cliente" + e ); }
     }
+
+    public int validar(String nombre, String password, Connection con) {
+       try {
+          String query = "SELECT * FROM Estudiante WHERE nombre = ? and password = ?";
+          stmt = con.prepareStatement(query);
+          stmt.setString(1, nombre);
+          stmt.setString(2, password);
+
+          ResultSet rs = stmt.executeQuery();
+          if (rs.next()) { ///Va al primer registro si lo hay
+             int ncuenta = rs.getInt ("ID");
+             rs.close();
+             return( ncuenta );
+          }
+       } catch (SQLException e) {}
+       return 0;
+    }
+
+    public void agregar(String usuario, String paswd, int cuenta, String nombre, Connection con){
+          try {
+             String query = "INSERT INTO Estudiante (usuario, password, cuenta, nombre) VALUES (?, ?, ?, ?)";
+             stmt = con.prepareStatement(query);
+             stmt.setString(1, usuario);
+             stmt.setString(2, paswd);
+             stmt.setInt(3, cuenta);
+             stmt.setString(4, nombre);
+             stmt.execute();
+          }catch (Exception e) { System.out.println ("No se pudo ejecutar agregar() a la tabla Cliente" + e ); }
+       }
 }

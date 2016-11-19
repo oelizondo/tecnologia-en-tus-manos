@@ -28,8 +28,8 @@ compile_interfaces() {
 }
 
 if [ "$1" == "compile" ]; then
-  #compile_controllers
   compile_entities
+  compile_controllers
   compile_interfaces
   exit
 fi
