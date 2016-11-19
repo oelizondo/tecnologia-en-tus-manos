@@ -1,0 +1,61 @@
+#! /bin/bash
+# Basic CLI for compiling Java project
+# export CLASSPATH=$CLASSPATH:/usr/local/apache-tomcat-8.5.6/lib/servlet-api.jar
+# export CLASSPATH=$CLASSPATH:/webapps/WEB-INF/classes/
+# export CLASSPATH=$CLASSPATH:/usr/local/apache-tomcat-8.5.6/lib/postgresql-9.4.1211.jre6.jar
+
+set -e
+
+setClasspath() {
+  export CLASSPATH=$CLASSPATH:/usr/local/apache-tomcat-8.5.6/lib/servlet-api.jar
+  export CLASSPATH=$CLASSPATH:/usr/local/apache-tomcat-8.5.6/lib/postgresql-9.4.1211.jre6.jar
+  export CLASSPATH=$CLASSPATH:/webapps/WEB-INF/classes/
+}
+
+compile_controllers() {
+  echo "compiling controllers"
+  javac -d WEB-INF/classes Controles/*.java
+}
+
+compile_entities() {
+  echo "compiling entities"
+  javac -d WEB-INF/classes Entidades/*.java
+}
+
+compile_interfaces() {
+  echo "compiling interfaces"
+  javac -d WEB-INF/classes Interfaces/*.java
+}
+
+if [ "$1" == "compile" ]; then
+  compile_controllers
+  compile_entities
+  compile_interfaces
+  exit
+fi
+
+if [ "$1" == "managedb" ]; then
+  psql tetm
+  exit
+fi
+
+if [ "$1" == "reset" ]; then
+  /usr/local/apache-tomcat-8.5.6/bin/shutdown.sh
+  /usr/local/apache-tomcat-8.5.6/bin/startup.sh
+  exit
+fi
+
+if [ "$1" == "down" ]; then
+  /usr/local/apache-tomcat-8.5.6/bin/shutdown.sh
+  exit
+fi
+
+if [ "$1" == "up" ]; then
+  /usr/local/apache-tomcat-8.5.6/bin/startup.sh
+  exitmc
+fi
+
+if [ "$1" == "classpath" ]; then
+  setClasspath
+  exit
+fi
