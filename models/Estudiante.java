@@ -8,7 +8,7 @@ import java.sql.SQLException;
 public class Estudiante{
     PreparedStatement stmt;
 
-      public int tomarLecturas(String id, Connection con){
+      public int tomarLecturas(int idLectura, Connection con){
         try{
             String query = "SELECT idLectura FROM Lectura WHERE idLectura = ?";
             stmt = con.prepareStatement(query);
@@ -16,9 +16,9 @@ public class Estudiante{
 
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) { ///Va al primer registro si lo hay
-               int idLectura = rs.getInt ("idLectura");
+               int idLect = rs.getInt ("idLectura");
                rs.close();
-               return(idLectura);
+               return(idLect);
              }
           } catch (SQLException e) {}
          return 0;
@@ -44,13 +44,14 @@ public class Estudiante{
          stmt = con.prepareStatement(query);
          stmt.setInt(1, idEjercicio);
 
+         ResultSet rs = stmt.executeQuery();
          if (rs.next()) { ///Va al primer registro si lo hay
           String sPregunta = rs.getString ("pregunta");
           rs.close();
           return(sPregunta);
            }
          } catch (SQLException e) {}
-         return 0;
+         return "";
        }
 
 
@@ -60,13 +61,14 @@ public class Estudiante{
         stmt = con.prepareStatement(query);
         stmt.setInt(1, idLectura);
 
+        ResultSet rs = stmt.executeQuery();
         if (rs.next()) { ///Va al primer registro si lo hay
          int nIdEjercicio = rs.getInt ("idEjercicio");
          rs.close();
-         return(getDescripcion(nIdEjercicio, con));
+         return(getPregunta(nIdEjercicio, con));
           }
         } catch (SQLException e) {}
-        return 0;
+        return "";
       }
 
     public int compartirAvances(int idAlumno, Connection con){
@@ -75,6 +77,7 @@ public class Estudiante{
         stmt = con.prepareStatement(query);
         stmt.setInt(1,idAlumno);
 
+        ResultSet rs = stmt.executeQuery();
         if (rs.next()) { ///Va al primer registro si lo hay
          int iCount = rs.getInt ("COUNT(*)");
          rs.close();
@@ -84,13 +87,13 @@ public class Estudiante{
         return 0;
       }
 
-    public void darseAlta(String nombre, String telefono, String mail, String password){
+    public void darseAlta(String nombre, String telefono, String mail, String password, Connection con){
       try {
          String query = "INSERT INTO alumno (idAdministrador, nombre, telefono, mail, password) VALUES (?, ?, ?, ?, ?)";
          stmt = con.prepareStatement(query);
-         stmt.setString(1, 1);
+         stmt.setInt(1, 1);
          stmt.setString(2, nombre);
-         stmt.setInt(3, telefono);
+         stmt.setString(3, telefono);
          stmt.setString(4, mail);
          stmt.setString(5, password);
          stmt.execute();
