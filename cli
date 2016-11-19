@@ -14,21 +14,21 @@ setClasspath() {
 
 compile_controllers() {
   echo "compiling controllers"
-  javac -d WEB-INF/classes Controles/*.java
+  javac -d WEB-INF/classes controllers/*.java
 }
 
 compile_entities() {
   echo "compiling entities"
-  javac -d WEB-INF/classes Entidades/*.java
+  javac -d WEB-INF/classes models/*.java
 }
 
 compile_interfaces() {
   echo "compiling interfaces"
-  javac -d WEB-INF/classes Interfaces/*.java
+  javac -d WEB-INF/classes interfaces/*.java
 }
 
 if [ "$1" == "compile" ]; then
-  compile_controllers
+  #compile_controllers
   compile_entities
   compile_interfaces
   exit
