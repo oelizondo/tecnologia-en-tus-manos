@@ -47,3 +47,9 @@ CREATE TABLE Calificacion (
   calificacion INT NOT NULL,
   CONSTRAINT IdCalificacion PRIMARY KEY (IdEstudiante, IdEjercicio)
 );
+
+INSERT INTO Lectura (idejercicio, idadministrador, capitulo, seccion, contenido)
+       VALUES (1,1, 'capitulo 1', 'seccion 1', 'contenido de la primera lectura');
+
+INSERT INTO Lectura (idejercicio, idadministrador, capitulo, seccion, contenido)
+       VALUES (1,1, 'capitulo 2', 'seccion 2', 'contenido de la segunda lectura');
