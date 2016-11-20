@@ -50,10 +50,8 @@ public class MenuServlet extends HttpServlet {
             "<title>Tecnologia en tus manos</title> \n" +
             "</head> \n" +
             "<body> \n" +
-            "<div class='row navigaition'> \n" +
-            "<a href=Logout>Terminar la sesion</a> \n" +
-            "</div> \n" +
-            "<div class='container'> \n" +
+            "<div class='container center title'> \n" +
+              "<a href=Logout>Terminar la sesion</a> \n" +
               "<p><a href='Lecturas'>Ir a Lecturas</a></p> \n" +
             "</div> \n" +
             "</body> \n" +
