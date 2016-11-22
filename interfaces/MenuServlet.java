@@ -53,6 +53,7 @@ public class MenuServlet extends HttpServlet {
             "<div class='container center title'> \n" +
               "<a href=Logout>Terminar la sesion</a> \n" +
               "<p><a href='Lecturas'>Ir a Lecturas</a></p> \n" +
+              "<a href=Ejercicio> Ejecicio </a> \n" +
             "</div> \n" +
             "</body> \n" +
             "</html>"
