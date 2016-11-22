@@ -4,7 +4,6 @@ import models.Estudiante;
 
 public class ControlLogin {
    Estudiante estudiante;
-
    public ControlLogin(){
      estudiante = new Estudiante();
    }
@@ -18,5 +17,6 @@ public class ControlLogin {
       int ncuenta = estudiante.validar(usuario, password, con);
       return( ncuenta );
    }
+
 
 }

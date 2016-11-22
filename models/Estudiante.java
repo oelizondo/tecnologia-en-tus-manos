@@ -98,70 +98,6 @@ public class Estudiante{
           } catch (SQLException e) {}
       }
 
-
-      public int tomarLecturas(int idLectura, Connection con){
-        try{
-            String query = "SELECT Id FROM Lectura WHERE Id = ?";
-            stmt = con.prepareStatement(query);
-            stmt.setInt(1, idLectura);
-
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next()) { ///Va al primer registro si lo hay
-               int idLect = rs.getInt ("Id");
-               rs.close();
-               return(idLect);
-             }
-          } catch (SQLException e) {}
-         return 0;
-      }
-
-     public int verLecturas(Connection con){
-       try{
-          String query = "SELECT * FROM Lectura";
-          stmt = con.prepareStatement(query);
-          ResultSet rs = stmt.executeQuery();
-          if (rs.next()) { ///Va al primer registro si lo hay
-             int idLectura = rs.getInt ("Id");
-             rs.close();
-             return(idLectura);
-           }
-        } catch (SQLException e) {}
-       return 0;
-       }
-
-     public String getPregunta(int idEjercicio, Connection con){
-       try{
-         String query = "SELECT pregunta FROM Ejercicio WHERE Id = ?";
-         stmt = con.prepareStatement(query);
-         stmt.setInt(1, idEjercicio);
-
-         ResultSet rs = stmt.executeQuery();
-         if (rs.next()) { ///Va al primer registro si lo hay
-          String sPregunta = rs.getString ("pregunta");
-          rs.close();
-          return(sPregunta);
-           }
-         } catch (SQLException e) {}
-         return "";
-       }
-
-
-     public String getEjercicio(int idLectura, Connection con){
-      try{
-        String query = "SELECT Id FROM Lectura WHERE Id = ?";
-        stmt = con.prepareStatement(query);
-        stmt.setInt(1, idLectura);
-
-        ResultSet rs = stmt.executeQuery();
-        if (rs.next()) { ///Va al primer registro si lo hay
-         int nIdEjercicio = rs.getInt ("Id");
-         rs.close();
-         return(getPregunta(nIdEjercicio, con));
-          }
-        } catch (SQLException e) {}
-        return "";
-      }
-
     public int compartirAvances(int idAlumno, Connection con){
       try{
         String query = "SELECT COUNT(*) FROM calificacion WHERE idEstudiante = ? AND calificacion = 100";
@@ -200,7 +136,7 @@ public class Estudiante{
 
           ResultSet rs = stmt.executeQuery();
           if (rs.next()) { ///Va al primer registro si lo hay
-             int ncuenta = rs.getInt ("ID");
+             int ncuenta = rs.getInt ("Id");
              rs.close();
              return( ncuenta );
           }
@@ -208,15 +144,4 @@ public class Estudiante{
        return 0;
     }
 
-    public void agregar(String usuario, String paswd, int cuenta, String nombre, Connection con){
-          try {
-             String query = "INSERT INTO Estudiante (usuario, password, cuenta, nombre) VALUES (?, ?, ?, ?)";
-             stmt = con.prepareStatement(query);
-             stmt.setString(1, usuario);
-             stmt.setString(2, paswd);
-             stmt.setInt(3, cuenta);
-             stmt.setString(4, nombre);
-             stmt.execute();
-          }catch (Exception e) { System.out.println ("No se pudo ejecutar agregar() a la tabla Cliente" + e ); }
-       }
 }

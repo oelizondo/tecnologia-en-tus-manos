@@ -23,4 +23,20 @@ import java.sql.SQLException;
         } catch (SQLException e) {}
        return 0;
         }
-  }
+        
+      public void setCalificacion(int idEstudiante, int idEjercicio, int calificacion, Connection con){
+        try{
+            String query = "UPDATE Calificacion SET calificacion = ?  WHERE IdEstudiante = ? AND IdEjercicio = ?";
+            stmt = con.prepareStatement(query);
+            stmt.setInt(1, calificacion);
+            stmt.setInt(2, idEstudiante);
+            stmt.setInt(3, idEjercicio);
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) { ///Va al primer registro si lo hay
+               rs.close();
+             }
+          } catch (SQLException e) {}
+      }
+
+      }

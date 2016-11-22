@@ -46,6 +46,7 @@ public class Ejercicio{
           stmt = con.prepareStatement(query);
           stmt.setInt(1, idEjercicio);
 
+
           ResultSet rs = stmt.executeQuery();
           if (rs.next()) { ///Va al primer registro si lo hay
              String sRes = rs.getString ("respuesta");
@@ -60,20 +61,4 @@ public class Ejercicio{
        return true;
     }
 
-    public int sacarCalificacion(int idEjercicio, Connection con){
-      try{
-          String query = "SELECT calificacion FROM Ejercicio WHERE Id = ?";
-          stmt = con.prepareStatement(query);
-          stmt.setInt(1, idEjercicio);
-
-          ResultSet rs = stmt.executeQuery();
-          if (rs.next()) { ///Va al primer registro si lo hay
-             int iCal = rs.getInt ("calificacion");
-             rs.close();
-             return iCal;
-
-           }
-        } catch (SQLException e) {return 0;}
-       return 0;
-    }
 }
