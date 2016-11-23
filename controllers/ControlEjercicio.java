@@ -1,14 +1,13 @@
 package controllers;
-import models.Calificacion;
-import models.Ejercicio;
 import java.sql.Connection;
+import models.Ejercicio;
+import models.Calificacion;
 
-Public class ControlEjercicio{
+public class ControlEjercicio{
   Ejercicio ejercicio;
   Calificacion calificacion;
-  PreparedStatement stmt;
 
-   public ControlLectura(){
+   public ControlEjercicio(){
      ejercicio = new Ejercicio();
      calificacion = new Calificacion();
    }

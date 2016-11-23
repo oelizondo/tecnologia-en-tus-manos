@@ -8,8 +8,8 @@ public class ControlLogin {
      estudiante = new Estudiante();
    }
 
-   public void agregarEstudiante (String usuario, String paswd, int cuenta, String nombre, Connection con){
-      estudiante.agregar(usuario, paswd, cuenta, nombre, con);
+   public void agregarEstudiante (String usuario, String paswd, String cuenta, String nombre, Connection con){
+      estudiante.darseAlta(usuario, paswd, cuenta, nombre, con);
    }
 
    ///Valida al estudiante en la base de datos

@@ -19,11 +19,11 @@ import controllers.ControlLectura;
 
 @WebServlet(urlPatterns = "/Calificaciones",
   initParams = {
-     @WebInitParam(name = "class", value = "interfaces.CalificacionesServlet")
+     @WebInitParam(name = "class", value = "interfaces.CalificacionServlet")
   }
 )
 
-public class CalificacionesServlet extends HttpServlet {
+public class CalificacionServlet extends HttpServlet {
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
      doPost(request,response);

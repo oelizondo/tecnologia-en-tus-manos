@@ -116,13 +116,12 @@ public class Estudiante{
 
     public void darseAlta(String nombre, String telefono, String mail, String password, Connection con){
       try {
-         String query = "INSERT INTO Estudiante (idAdministrador, nombre, telefono, mail, password) VALUES (?, ?, ?, ?, ?)";
+         String query = "INSERT INTO Estudiante (idadmin, nombre, telefono, mail, password) VALUES (1, ?, ?, ?, ?)";
          stmt = con.prepareStatement(query);
-         stmt.setInt(1, 1);
-         stmt.setString(2, nombre);
-         stmt.setString(3, telefono);
-         stmt.setString(4, mail);
-         stmt.setString(5, password);
+         stmt.setString(1, nombre);
+         stmt.setString(2, telefono);
+         stmt.setString(3, mail);
+         stmt.setString(4, password);
          stmt.execute();
       }catch (Exception e) { System.out.println ("No se pudo ejecutar darseAlta() a la tabla Alumno" + e ); }
     }

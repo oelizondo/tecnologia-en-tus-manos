@@ -27,18 +27,6 @@ public class DarEstudianteAltaServlet extends HttpServlet {
   ControlEstudiante estudiante = new ControlEstudiante();
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
-          doPost(request,response);
-          PrintWriter out = response.getWriter();
-          HttpSession session = request.getSession(false);
-          if(session == null) {
-            response.setContentType("text/html");
-            out.println("<p color=red>Inicia sesion primero.</p>");
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/index");
-            rd.include(request, response);
-          }
-          else {
-
-          }
     }
 
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -47,23 +35,16 @@ public class DarEstudianteAltaServlet extends HttpServlet {
       Connection conn = (Connection) getServletContext().getAttribute("DBConnection");
       HttpSession session = request.getSession(false);
 
-     if(session == null) {
-       response.setContentType("text/html");
-       out.println("<p color=red>Inicia sesion primero.</p>");
-       RequestDispatcher rd = getServletContext().getRequestDispatcher("/index");
-       rd.include(request, response);
-     }
-     else {
        String nombre = request.getParameter("nombre");
        String telefono = request.getParameter("telefono");
        String mail = request.getParameter("mail");
        String password = request.getParameter("password");
        ControlEstudiante cEstudiante = new ControlEstudiante();
-       cEstudiante.darseAlta(nombre, telefono, mail, password, conn);
+       cEstudiante.crearEstudiante(nombre, telefono, mail, password, conn);
        response.setContentType("text/html");
        out.println("<h3>Se dio de alta al alumno exitosamente</h3>");
-       RequestDispatcher rd = getServletContext().getRequestDispatcher("/Menu");
+       RequestDispatcher rd = getServletContext().getRequestDispatcher("/index");
        rd.include(request, response);
-     }
+   }
 
 }

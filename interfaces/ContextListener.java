@@ -15,9 +15,7 @@ public class ContextListener implements ServletContextListener {
        ServletContext context = servletContextEvent.getServletContext();
        try {
          //Sintaxis de DBConnectionManager(String dbURL, String user, String pwd)
-			   DBConnectionManager connectionManager = new DBConnectionManager(
-            "jdbc:mysql://localhost/tecno", "root", "lt11ug7xo2q"
-         );
+			   DBConnectionManager connectionManager = new DBConnectionManager("jdbc:postgresql://localhost/tetm", "", "");
 			   context.setAttribute("DBConnection", connectionManager.getConnection());
 		   } catch (ClassNotFoundException e) {
 			   e.printStackTrace();
