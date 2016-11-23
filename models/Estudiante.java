@@ -124,7 +124,7 @@ public class Estudiante{
          stmt.setString(4, mail);
          stmt.setString(5, password);
          stmt.execute();
-      }catch (Exception e) { System.out.println ("No se pudo ejecutar agregar() a la tabla Alumno" + e ); }
+      }catch (Exception e) { System.out.println ("No se pudo ejecutar darseAlta() a la tabla Alumno" + e ); }
     }
 
     public int validar(String nombre, String password, Connection con) {
